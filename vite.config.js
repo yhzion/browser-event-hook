@@ -1,14 +1,19 @@
-import { defineConfig } from "vite";
-import eslintPlugin from "vite-plugin-eslint";
 import { resolve } from "path";
-import dts from 'vite-plugin-dts';
+import { defineConfig } from "vite";
+import dts from "vite-plugin-dts";
+import eslintPlugin from "vite-plugin-eslint";
 
 export default defineConfig({
   plugins: [eslintPlugin(), dts()],
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
   build: {
     lib: {
       // eslint-disable-next-line no-undef
-      entry: resolve(__dirname, "index.js"),
+      entry: resolve(__dirname, "index.ts"),
       name: "browser-event-hook",
       fileName: "index",
       formats: ["es", "umd", "cjs"],

@@ -1,5 +1,5 @@
-import dispatch from "./dispatch.js";
-import listen from "./listen.js";
+import dispatch from "./dispatch";
+import listen from "./listen";
 
 export const useBrowserEvent = () => {
   return {

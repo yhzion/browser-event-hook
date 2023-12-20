@@ -1,3 +1,10 @@
+import {
+  describe,
+  expect,
+  test,
+} from "@jest/globals";
+import { useBrowserEvent } from "../browser-event-hook";
+
 describe("useBrowserEvent", () => {
   test("is defined", () => {
     expect(useBrowserEvent).toBeDefined();
@@ -10,11 +17,11 @@ describe("useBrowserEvent", () => {
   });
 
   describe("add event listener and remove", () => {
-    let mockElement;
-    let listen;
-    let dispatch;
-    let callback;
-    let off;
+    let mockElement: any = null;
+    let listen: any = null;
+    let dispatch: any = null;
+    let callback: any = null;
+    let off: any;
     beforeEach(() => {
       mockElement = document.createElement("div");
       const obj = useBrowserEvent();
@@ -24,7 +31,7 @@ describe("useBrowserEvent", () => {
       const _listen = listen(
         mockElement,
         "customEvent",
-        (event) => {
+        (event: any) => {
           callback(event.detail);
         },
       );
@@ -50,4 +57,3 @@ describe("useBrowserEvent", () => {
     });
   });
 });
-import { useBrowserEvent } from "../browser-event-hook.js";

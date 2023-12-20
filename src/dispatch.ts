@@ -1,16 +1,8 @@
 const dispatch = (
-  element,
-  eventType,
+  element: Element | Window,
+  eventType: string,
   data = null,
 ) => {
-  if (
-    !(
-      element instanceof Element ||
-      element === window
-    )
-  ) {
-    throw new Error("element must be Element");
-  }
   const event = new CustomEvent(eventType, {
     detail: data,
   });

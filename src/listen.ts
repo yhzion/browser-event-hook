@@ -1,16 +1,23 @@
+type Options = {
+  capture?: boolean;
+  once?: boolean;
+  passive?: boolean;
+  lazyDelay: number;
+};
+
 const defaultOptions = {
   capture: false,
   once: false,
   passive: false,
   lazyDelay: 0,
-};
+} as Options;
 
 const getEventHandler = (
-  callback,
-  { lazyDelay },
+  callback: any,
+  lazyDelay: number,
 ) => {
-  let timer = null;
-  return (_event) => {
+  let timer: number | null = null;
+  return (_event: Event) => {
     if (lazyDelay > 0) {
       if (timer !== null) {
         clearTimeout(timer);
@@ -18,34 +25,21 @@ const getEventHandler = (
       timer = setTimeout(
         () => callback(_event),
         lazyDelay,
-      );
+      ) as unknown as number;
     } else {
       callback(_event);
     }
   };
 };
 const listen = (
-  element,
-  eventType,
-  callback,
+  element: Element | Window,
+  eventType: string,
+  callback: any,
   options = defaultOptions,
 ) => {
-  if (
-    !(
-      element instanceof Element ||
-      element === window
-    )
-  ) {
-    throw new Error(
-      "element must be Element or window",
-    );
-  }
-  if (typeof callback !== "function") {
-    throw new Error("callback must be function");
-  }
   const eventHandler = getEventHandler(
     callback,
-    options,
+    options.lazyDelay,
   );
   element.addEventListener(
     eventType,
@@ -70,7 +64,7 @@ const listen = (
         );
         currentState = SWITCH.OFF;
       } else {
-        throw new Error(
+        console.warn(
           "Event listener already removed",
         );
       }
@@ -84,7 +78,7 @@ const listen = (
         );
         currentState = SWITCH.ON;
       } else {
-        throw new Error(
+        console.warn(
           "Event listener already added",
         );
       }
