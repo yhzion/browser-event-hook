@@ -48,7 +48,8 @@
     "path": "^0.12.7",
     "prettier": "3.1.0",
     "prettier-plugin-organize-imports": "^3.2.4",
-    "vite": "^5.0.6",
+    "vite": "^5.0.9",
+    "vite-plugin-dts": "^3.6.4",
     "vite-plugin-eslint": "^1.8.1"
   }
 }
